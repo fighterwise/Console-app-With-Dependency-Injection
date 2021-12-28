@@ -6,12 +6,23 @@ using System.Threading.Tasks;
 
 namespace Dependency_Injection
 {
-    public class ShippingProcessor
+    public interface IShippingProcessor
     {
+        public void MailProduct(Product product);
+
+    }
+    public class ShippingProcessor : IShippingProcessor
+    {
+        private readonly IProductStockRepository _productStockRepository;
+        public ShippingProcessor(IProductStockRepository productStockRepository)
+        {
+            _productStockRepository = productStockRepository;
+        }
+
         public void MailProduct(Product product) 
         {
-            var productstockrepository = new ProductStockRepository();
-            productstockrepository.ReduceStock(product);
+
+            _productStockRepository.ReduceStock(product);
 
             Console.WriteLine("Call to Shipping API");
         }

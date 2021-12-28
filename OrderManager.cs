@@ -17,11 +17,30 @@ namespace Dependency_Injection
     }
     public class OrderManager :IOrderManager
     {
+        private readonly IProductStockRepository productStockRepository;
+        private readonly IPaymentProcessor paymentProcessor;
+        private readonly IShippingProcessor shippingProcessor;
+
+        public OrderManager(IProductStockRepository productStockRepository,
+            IPaymentProcessor paymentProcessor,
+            IShippingProcessor shippingProcessor)
+        {
+            this.productStockRepository = productStockRepository;
+            this.paymentProcessor = paymentProcessor;
+            this.shippingProcessor = shippingProcessor;
+        }
+
+
+
         public void Submit(Product product, string creditCardNumber, string expireDate)
         {
+
+
+            
+            
+            
             //Check product
 
-            var productStockRepository = new ProductStockRepository();
             if (!productStockRepository.IsInStock(product)) 
             {
                 throw new Exception($"{product.ToString()} current not is stock");
@@ -29,14 +48,14 @@ namespace Dependency_Injection
             }
 
             //Payment
-            var paymentProcessor = new PaymentProcessor();
+            
             paymentProcessor.ChargCreditCard(creditCardNumber, expireDate);
 
 
 
             // Ship the Product
-            var shippingprocessor = new ShippingProcessor();
-            shippingprocessor.MailProduct(product);
+            
+            shippingProcessor.MailProduct(product);
         
         }
 

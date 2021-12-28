@@ -1,13 +1,20 @@
 ﻿using System;
+using Dependency_Injection;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Dependency_Injection
 {
     class Program
     {
+        public static readonly IServiceProvider Container = new ContainerBuilder().Build();
+
         static void Main(string[] args)
         {
             var product = string.Empty;
-            var ordermanager = new OrderManager();
+            var productsStackRepository = new ProductStockRepository();
+            var ordermanager = Container.GetService<IOrderManager>();
+
 
             while (product != "exit")
             {
