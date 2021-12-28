@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace Dependency_Injection
 {
-    public class ProductStockRepository
+    public interface IProductStockRepository
+    {
+        public void ReduceStock(Product product);
+        public void AddStock(Product product);
+        public bool IsInStock(Product product);
+
+    }
+
+    public class ProductStockRepository : IProductStockRepository
     {
         private static Dictionary<Product, int> _productStockDatabase = Setup();
 

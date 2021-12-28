@@ -5,8 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Dependency_Injection
+
+
 {
-    public class OrderManager
+
+    public interface IOrderManager
+    {
+        public void Submit(Product product, string creditCardNumber, string expireDate);
+
+
+    }
+    public class OrderManager :IOrderManager
     {
         public void Submit(Product product, string creditCardNumber, string expireDate)
         {

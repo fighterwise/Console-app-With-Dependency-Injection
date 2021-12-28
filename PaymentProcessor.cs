@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Dependency_Injection
 {
-    public class PaymentProcessor
+    public interface IPaymentProcessor
+    {
+        void ChargCreditCard(string creditcardNumber, string experyDate);
+
+
+    }
+    public class PaymentProcessor : IPaymentProcessor
     {
         public void ChargCreditCard(string creditcardNumber, string experyDate)
         {
